@@ -32,7 +32,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:600;font-size:19px}
 .brand .ai{color:var(--teal)}
-.nav-cta{font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px;
+.nav-cta{font-size:14px;font-weight:600;padding:9px 18px;border-radius:999px;color:#fff;
   background:var(--purple);transition:transform .15s,background .15s}
 .nav-cta:hover{background:#8b5eff;transform:translateY(-1px)}
 
@@ -62,7 +62,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .dz-actions{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
 .btn{font-size:14.5px;font-weight:600;padding:11px 22px;border-radius:999px;
   transition:transform .15s,background .15s,border-color .15s}
-.btn-primary{background:var(--purple)}
+.btn-primary{background:var(--purple);color:#fff}
 .btn-primary:hover{background:#8b5eff;transform:translateY(-1px)}
 .btn-ghost{border:1px solid var(--line);color:var(--text2)}
 .btn-ghost:hover{border-color:var(--teal);color:var(--text)}
@@ -139,9 +139,11 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* theme toggle button */
 .theme-btn{display:inline-flex;align-items:center;justify-content:center;
-  width:38px;height:38px;border-radius:999px;border:1px solid var(--line);
-  color:var(--text2);transition:color .15s,border-color .15s,background .15s}
-.theme-btn:hover{color:var(--text);border-color:var(--purple)}
+  width:38px;height:38px;border-radius:999px;border:none;
+  background:#2a2a33;color:#F2F2F5;transition:background .15s,color .15s}
+.theme-btn:hover{background:#3a3a46}
+[data-theme="light"] .theme-btn{background:#e4e4ec;color:#26262e}
+[data-theme="light"] .theme-btn:hover{background:#d6d6e0}
 .nav-right{display:flex;align-items:center;gap:6px}
 
 /* smooth theme transition */
@@ -267,3 +269,25 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
   padding:28px;background:var(--bg2);text-align:center}
 .article-cta h3{font-family:"Space Grotesk";font-size:20px;font-weight:600;margin-bottom:8px}
 .article-cta p{color:var(--text2);font-size:14.5px;margin-bottom:18px}
+
+
+/* solid grey button (e.g. New image) */
+.btn-grey{background:#3a3a44;color:#fff}
+.btn-grey:hover{background:#4a4a55;transform:translateY(-1px)}
+[data-theme="light"] .btn-grey{background:#dcdce5;color:#26262e}
+[data-theme="light"] .btn-grey:hover{background:#cfcfda}
+
+
+/* responsive main nav */
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-menu-btn{display:none;width:38px;height:38px;border-radius:999px;
+  align-items:center;justify-content:center;background:#2a2a33;color:#F2F2F5}
+[data-theme="light"] .nav-menu-btn{background:#e4e4ec;color:#26262e}
+.nav-drop{display:none}
+@media(max-width:720px){
+  .nav-links{display:none}
+  .nav-menu-btn{display:inline-flex}
+  .nav-drop{display:flex;flex-direction:column;gap:4px;padding:10px 24px 16px;
+    border-top:1px solid var(--line);background:var(--nav-bg)}
+  .nav-drop .nav-link{padding:12px 14px;font-size:15.5px}
+}

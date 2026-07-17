@@ -1,21 +1,42 @@
 "use client";
+import { useState } from "react";
 import LMBLogo from "./LMBLogo";
 import DetectorLogo from "./DetectorLogo";
 import ThemeToggle from "./ThemeToggle";
 
 export default function Home() {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <>
       <nav className="nav">
         <div className="wrap nav-in">
           <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technologies</span></a>
           <div className="nav-right">
-            <a className="nav-link" href="#products">Products</a>
-            <a className="nav-link" href="#work">What we do</a>
-            <a className="nav-link" href="/guides">Guides</a>
+            <div className="nav-links">
+              <a className="nav-link" href="#products">Products</a>
+              <a className="nav-link" href="#work">What we do</a>
+            </div>
             <ThemeToggle />
+            <button
+              className="nav-menu-btn"
+              aria-label="Menu"
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+                stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                {menuOpen
+                  ? <path d="M6 6l12 12M18 6L6 18" />
+                  : <path d="M4 7h16M4 12h16M4 17h16" />}
+              </svg>
+            </button>
           </div>
         </div>
+        {menuOpen && (
+          <div className="nav-drop">
+            <a className="nav-link" href="#products" onClick={() => setMenuOpen(false)}>Products</a>
+            <a className="nav-link" href="#work" onClick={() => setMenuOpen(false)}>What we do</a>
+          </div>
+        )}
       </nav>
 
       <header className="hero" id="top">

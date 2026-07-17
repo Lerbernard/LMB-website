@@ -160,7 +160,7 @@ export default function Home() {
                         {status === "done" ? "Check again" : "Check this image"}
                       </button>
                       <button className="btn btn-teal" onClick={openCrop}>Crop &amp; check</button>
-                      <button className="btn btn-ghost" onClick={reset}>New image</button>
+                      <button className="btn btn-grey" onClick={reset}>New image</button>
                     </>
                   )}
                 </div>
