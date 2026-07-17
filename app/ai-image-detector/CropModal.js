@@ -9,9 +9,9 @@ import { useEffect, useRef, useState } from "react";
 export default function CropModal({ src, onCancel, onCrop }) {
   const stageRef = useRef(null);
   const canvasRef = useRef(null);
-  const imgObj = useRef(null); // decoded Image()
-  const [size, setSize] = useState(null); // { cw, ch } canvas px
-  const [box, setBox] = useState(null); // { x, y, w, h } in canvas px
+  const imgObj = useRef(null);          // decoded Image()
+  const [size, setSize] = useState(null);   // { cw, ch } canvas px
+  const [box, setBox] = useState(null);     // { x, y, w, h } in canvas px
   const drag = useRef(null);
 
   // decode the image, then compute the display size ourselves
@@ -42,15 +42,13 @@ export default function CropModal({ src, onCancel, onCrop }) {
     const cw = Math.max(1, Math.floor(im.naturalWidth * scale));
     const ch = Math.max(1, Math.floor(im.naturalHeight * scale));
     setSize({ cw, ch });
-    const w = Math.round(cw * 0.8),
-      h = Math.round(ch * 0.8);
+    const w = Math.round(cw * 0.8), h = Math.round(ch * 0.8);
     setBox({ x: Math.round((cw - w) / 2), y: Math.round((ch - h) / 2), w, h });
   };
 
   // draw whenever the canvas size is (re)set
   useEffect(() => {
-    const c = canvasRef.current,
-      im = imgObj.current;
+    const c = canvasRef.current, im = imgObj.current;
     if (!c || !im || !size) return;
     c.width = size.cw;
     c.height = size.ch;
@@ -66,9 +64,7 @@ export default function CropModal({ src, onCancel, onCrop }) {
       const dx = p.clientX - drag.current.px;
       const dy = p.clientY - drag.current.py;
       const s = drag.current.start;
-      const W = size.cw,
-        H = size.ch,
-        MIN = 30;
+      const W = size.cw, H = size.ch, MIN = 30;
       const m = drag.current.mode;
 
       if (m === "move") {
@@ -81,10 +77,7 @@ export default function CropModal({ src, onCancel, onCrop }) {
         return;
       }
       // resize: move each edge independently, clamped to the canvas
-      let left = s.x,
-        top = s.y,
-        right = s.x + s.w,
-        bottom = s.y + s.h;
+      let left = s.x, top = s.y, right = s.x + s.w, bottom = s.y + s.h;
       if (m.includes("e")) right = Math.min(W, Math.max(s.x + MIN, s.x + s.w + dx));
       if (m.includes("s")) bottom = Math.min(H, Math.max(s.y + MIN, s.y + s.h + dy));
       if (m.includes("w")) left = Math.max(0, Math.min(right - MIN, s.x + dx));
@@ -119,19 +112,11 @@ export default function CropModal({ src, onCancel, onCrop }) {
     const canvas = document.createElement("canvas");
     canvas.width = Math.max(1, Math.round(box.w * sx));
     canvas.height = Math.max(1, Math.round(box.h * sy));
-    canvas
-      .getContext("2d")
-      .drawImage(
-        im,
-        box.x * sx,
-        box.y * sy,
-        box.w * sx,
-        box.h * sy,
-        0,
-        0,
-        canvas.width,
-        canvas.height,
-      );
+    canvas.getContext("2d").drawImage(
+      im,
+      box.x * sx, box.y * sy, box.w * sx, box.h * sy,
+      0, 0, canvas.width, canvas.height
+    );
     canvas.toBlob((blob) => blob && onCrop(blob), "image/jpeg", 0.92);
   };
 
@@ -145,18 +130,11 @@ export default function CropModal({ src, onCancel, onCrop }) {
   });
 
   return (
-    <div
-      className="modal"
-      onMouseDown={(e) => e.target === e.currentTarget && onCancel()}
-    >
+    <div className="modal" onMouseDown={(e) => e.target === e.currentTarget && onCancel()}>
       <div className="modal-card">
         <div className="modal-head">
           <h3>Crop to what matters</h3>
-          <button
-            className="btn-ghost btn"
-            onClick={onCancel}
-            style={{ padding: "7px 14px" }}
-          >
+          <button className="btn-ghost btn" onClick={onCancel} style={{ padding: "7px 14px" }}>
             Cancel
           </button>
         </div>
@@ -192,12 +170,8 @@ export default function CropModal({ src, onCancel, onCrop }) {
           </div>
         </div>
         <div className="modal-foot">
-          <button className="btn btn-ghost" onClick={onCancel}>
-            Use full image
-          </button>
-          <button className="btn btn-teal" onClick={doCrop}>
-            Crop &amp; check
-          </button>
+          <button className="btn btn-ghost" onClick={onCancel}>Use full image</button>
+          <button className="btn btn-teal" onClick={doCrop}>Crop &amp; check</button>
         </div>
       </div>
     </div>

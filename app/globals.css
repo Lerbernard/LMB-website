@@ -241,3 +241,29 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
   transition:transform .2s}
 .faq-list details[open] summary::after{transform:rotate(45deg)}
 .faq-list details p{padding:0 22px 20px;color:var(--text2);font-size:14.5px;margin:0}
+
+/* ad units (detector page only) */
+.ad-box{max-width:720px;margin:36px auto;text-align:center}
+.ad-label{display:block;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--text3);margin-bottom:6px}
+
+/* ===== guide / article pages ===== */
+.article-wrap{max-width:720px;padding-top:48px;padding-bottom:24px}
+.article-head{text-align:center;margin-bottom:36px}
+.article-head h1{font-family:"Space Grotesk";font-size:clamp(30px,5vw,44px);font-weight:600;margin-bottom:10px}
+.article-head p{color:var(--text2)}
+.guide-list{display:grid;gap:16px}
+.guide-card{display:block;border:1px solid var(--line);border-radius:var(--radius);
+  padding:24px;background:var(--bg2);transition:transform .18s,border-color .18s}
+.guide-card:hover{transform:translateY(-2px);border-color:var(--purple)}
+.guide-card h2{font-family:"Space Grotesk";font-size:19px;font-weight:600;margin-bottom:6px}
+.guide-card p{color:var(--text2);font-size:14.5px;margin-bottom:12px}
+.article h1{font-family:"Space Grotesk";font-size:clamp(30px,5vw,42px);font-weight:600;
+  line-height:1.12;margin-bottom:16px}
+.article-lead{font-size:17px;color:var(--text2);margin-bottom:30px}
+.article h2{font-family:"Space Grotesk";font-size:21px;font-weight:600;margin:30px 0 10px}
+.article p{color:var(--text2);font-size:15.5px;margin-bottom:14px}
+.article-cta{margin-top:40px;border:1px solid var(--line);border-radius:var(--radius);
+  padding:28px;background:var(--bg2);text-align:center}
+.article-cta h3{font-family:"Space Grotesk";font-size:20px;font-weight:600;margin-bottom:8px}
+.article-cta p{color:var(--text2);font-size:14.5px;margin-bottom:18px}

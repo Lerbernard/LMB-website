@@ -8,16 +8,11 @@ export default function Home() {
     <>
       <nav className="nav">
         <div className="wrap nav-in">
-          <a className="brand" href="/">
-            <LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technologies</span>
-          </a>
+          <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technologies</span></a>
           <div className="nav-right">
-            <a className="nav-link" href="#products">
-              Products
-            </a>
-            <a className="nav-link" href="#work">
-              What we do
-            </a>
+            <a className="nav-link" href="#products">Products</a>
+            <a className="nav-link" href="#work">What we do</a>
+            <a className="nav-link" href="/guides">Guides</a>
             <ThemeToggle />
           </div>
         </div>
@@ -26,26 +21,18 @@ export default function Home() {
       <header className="hero" id="top">
         <div className="hero-glow" />
         <div className="wrap">
-          <span className="eyebrow">
-            <LMBLogo size={17} /> Software studio
-          </span>
+          <span className="eyebrow"><LMBLogo size={17} /> Software studio</span>
           <h1 className="display">
-            We build <span className="g">software</span> people
-            <br />
-            actually want to use.
+            We build <span className="g">software</span> people<br />actually want to use.
           </h1>
           <p>
             LMB Technologies is a small studio shipping web and mobile products end to
-            end, from the first sketch to the app store. We design it, build it, and keep
-            it running.
+            end, from the first sketch to the app store. We design it, build it, and
+            keep it running.
           </p>
           <div className="hero-cta">
-            <a className="btn btn-primary" href="#products">
-              See our products
-            </a>
-            <a className="btn btn-ghost" href="#contact">
-              Work with us
-            </a>
+            <a className="btn btn-primary" href="#products">See our products</a>
+            <a className="btn btn-ghost" href="#contact">Work with us</a>
           </div>
         </div>
       </header>
@@ -59,26 +46,17 @@ export default function Home() {
             <div className="step">
               <div className="n">DESIGN</div>
               <h4>Product &amp; interface</h4>
-              <p>
-                Interfaces that feel obvious. We shape the flow, the visuals, and the
-                details that make a product click.
-              </p>
+              <p>Interfaces that feel obvious. We shape the flow, the visuals, and the details that make a product click.</p>
             </div>
             <div className="step">
               <div className="n">BUILD</div>
               <h4>Web &amp; mobile</h4>
-              <p>
-                Fast, reliable apps for the browser, Android, and iOS, built on modern,
-                maintainable foundations.
-              </p>
+              <p>Fast, reliable apps for the browser, Android, and iOS, built on modern, maintainable foundations.</p>
             </div>
             <div className="step">
               <div className="n">SHIP</div>
               <h4>Launch &amp; run</h4>
-              <p>
-                Store submissions, infrastructure, and the ongoing care that keeps a
-                product healthy after launch.
-              </p>
+              <p>Store submissions, infrastructure, and the ongoing care that keeps a product healthy after launch.</p>
             </div>
           </div>
         </section>
@@ -111,10 +89,7 @@ export default function Home() {
                   <span className="pc-tag">In the workshop</span>
                 </div>
               </div>
-              <p>
-                We&apos;re always building. New tools and apps from LMB Technologies land
-                here.
-              </p>
+              <p>We&apos;re always building. New tools and apps from LMB Technologies land here.</p>
               <span className="pc-cta muted">Coming soon</span>
             </div>
           </div>
@@ -124,18 +99,14 @@ export default function Home() {
         <section className="contact" id="contact">
           <h2 className="display">Have something to build?</h2>
           <p>Tell us what you&apos;re working on. We reply to every message.</p>
-          <a className="btn btn-primary" href="mailto:OverlAI.support@gmail.com">
-            Get in touch
-          </a>
+          <a className="btn btn-primary" href="mailto:OverlAI.support@gmail.com">Get in touch</a>
         </section>
       </main>
 
       <footer className="foot">
         <div className="wrap foot-in">
           <span>© {new Date().getFullYear()} LMB Technologies</span>
-          <span>
-            <a href="/ai-image-detector">AI Image Detection</a>
-          </span>
+          <span><a href="/ai-image-detector">AI Image Detection</a></span>
         </div>
       </footer>
     </>

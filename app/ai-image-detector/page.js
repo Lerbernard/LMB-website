@@ -1,6 +1,7 @@
 "use client";
 import { useRef, useState, useCallback } from "react";
 import CropModal from "./CropModal";
+import AdUnit from "./AdUnit";
 import LMBLogo from "../LMBLogo";
 import DetectorLogo from "../DetectorLogo";
 import ThemeToggle from "../ThemeToggle";
@@ -71,6 +72,7 @@ export default function Home() {
           <a className="brand" href="/"><LMBLogo size={30} /> LMB</a>
           <a className="brand product" href="/ai-image-detector"><DetectorLogo size={28} /> AI Image Detection</a>
           <div className="nav-right">
+            <a className="nav-link" href="/guides">Guides</a>
             <ThemeToggle />
           </div>
         </div>
@@ -169,6 +171,8 @@ export default function Home() {
           {status === "error" && !preview && <div className="err">{error}</div>}
         </section>
 
+        <AdUnit slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_TOP} />
+
         <section className="feature-band">
           <div className="fb-copy">
             <div className="n">The crop tool</div>
@@ -210,6 +214,8 @@ export default function Home() {
             </div>
           </div>
         </section>
+
+        <AdUnit slot={process.env.NEXT_PUBLIC_ADSENSE_SLOT_BOTTOM} />
 
         <section className="faq" id="faq">
           <h2 className="display">Frequently asked questions</h2>

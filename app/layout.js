@@ -8,22 +8,16 @@ export const metadata = {
   description:
     "LMB Technologies is a software studio that designs, builds, and ships web and mobile products end to end. Makers of a free AI image detection tool.",
   keywords: [
-    "LMB Technologies",
-    "software studio",
-    "app development",
-    "web development",
-    "mobile app studio",
-    "product design",
-    "AI image detection",
+    "LMB Technologies", "software studio", "app development", "web development",
+    "mobile app studio", "product design", "AI image detection",
   ],
   applicationName: "LMB Technologies",
   alternates: { canonical: SITE },
   openGraph: {
-    type: "website",
-    url: SITE,
-    siteName: "LMB Technologies",
+    type: "website", url: SITE, siteName: "LMB Technologies",
     title: "LMB Technologies - Software Studio",
-    description: "We build web and mobile software people actually want to use.",
+    description:
+      "We build web and mobile software people actually want to use.",
     images: [{ url: "/og.png", width: 1200, height: 630, alt: "LMB Technologies" }],
   },
   twitter: {
@@ -50,11 +44,7 @@ const jsonLd = {
   url: SITE,
   makesOffer: {
     "@type": "Offer",
-    itemOffered: {
-      "@type": "SoftwareApplication",
-      name: "AI Image Detection",
-      applicationCategory: "MultimediaApplication",
-    },
+    itemOffered: { "@type": "SoftwareApplication", name: "AI Image Detection", applicationCategory: "MultimediaApplication" },
   },
 };
 
@@ -74,10 +64,8 @@ export default function RootLayout({ children }) {
           href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap"
           rel="stylesheet"
         />
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
+        <script type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>{children}</body>
     </html>
