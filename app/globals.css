@@ -292,9 +292,7 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
   .nav-drop .nav-link{padding:12px 14px;font-size:15.5px}
 }
 
-/* footer pinned to the viewport bottom on short pages */
-body{display:flex;flex-direction:column}
-.foot{margin-top:auto}
+
 
 /* whole card reacts on hover, not just the border */
 .product-card:hover,.guide-card:hover{background:#1d1d26}
@@ -308,3 +306,12 @@ body{display:flex;flex-direction:column}
 .back-link:hover{color:var(--text);background:#34343f}
 [data-theme="light"] .back-link{background:#e4e4ec;color:#44444e}
 [data-theme="light"] .back-link:hover{background:#d6d6e0;color:#16161c}
+
+
+/* light mode: same wash, fainter */
+[data-theme="light"] .hero-glow{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(560px 360px at 50% 8%, rgba(124,77,255,.18), transparent 70%),
+             radial-gradient(420px 300px at 78% 32%, rgba(0,188,212,.10), transparent 70%)}
+
+/* brand group keeps company + product together on the left */
+.brand-group{display:flex;align-items:center}

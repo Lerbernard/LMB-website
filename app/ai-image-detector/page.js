@@ -149,8 +149,10 @@ export default function Home() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav className="nav">
         <div className="wrap nav-in">
-          <a className="brand" href="/"><LMBLogo size={30} /> LMB</a>
-          <a className="brand product" href="/ai-image-detector"><DetectorLogo size={28} /> AI Image Detection</a>
+          <div className="brand-group">
+            <a className="brand" href="/"><LMBLogo size={30} /> LMB</a>
+            <a className="brand product" href="/ai-image-detector"><DetectorLogo size={28} /> AI Image Detection</a>
+          </div>
           <div className="nav-right">
             <a className="nav-link" href="/ai-image-detector/guides">Guides</a>
             <ThemeToggle />
