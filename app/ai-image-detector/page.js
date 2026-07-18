@@ -256,7 +256,7 @@ export default function Home() {
 
       <footer className="foot">
         <div className="wrap foot-in">
-          <span>© {new Date().getFullYear()} LMB Technologies</span>
+          <span>© {new Date().getFullYear()} LMB Technology</span>
           <span>Results are estimates, verify anything that matters.</span>
         </div>
       </footer>

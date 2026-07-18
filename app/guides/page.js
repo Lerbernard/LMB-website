@@ -3,7 +3,7 @@ import { GuideNav, GuideFooter } from "./parts";
 const SITE = "https://www.lmbtechnology.com";
 
 export const metadata = {
-  title: "Guides - Spotting and Detecting AI Images | LMB Technologies",
+  title: "Guides - Spotting and Detecting AI Images | LMB Technology",
   description:
     "Practical guides on AI-generated images: how to spot them by eye, how AI image detectors work, and how to check a specific part of an image.",
   alternates: { canonical: `${SITE}/guides` },

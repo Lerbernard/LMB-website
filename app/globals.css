@@ -196,7 +196,7 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
 /* larger dropzone badge */
 .dz-badge{width:96px;height:96px}
 
-/* ===== LMB Technologies landing ===== */
+/* ===== LMB Technology landing ===== */
 .nav-link{font-size:14.5px;color:var(--text2);font-weight:500;
   padding:9px 16px;border-radius:999px;transition:color .15s,background .15s}
 .nav-link:hover{color:var(--text);background:rgba(255,255,255,.06)}

@@ -16,7 +16,7 @@ export const metadata = {
   openGraph: {
     type: "website",
     url: `${SITE}/ai-image-detector`,
-    siteName: "LMB Technologies",
+    siteName: "LMB Technology",
     title: "AI Detector with Crop Tool - Free AI Image Checker",
     description:
       "Upload any image, crop to the part that matters, and get an AI-likelihood score instantly. Free, no sign-up.",
@@ -56,12 +56,12 @@ const jsonLd = {
         "Works on photos, screenshots, and art",
         "No sign-up required",
       ],
-      publisher: { "@type": "Organization", name: "LMB Technologies", url: SITE_URL },
+      publisher: { "@type": "Organization", name: "LMB Technology", url: SITE_URL },
     },
     {
       "@type": "BreadcrumbList",
       itemListElement: [
-        { "@type": "ListItem", position: 1, name: "LMB Technologies", item: SITE_URL },
+        { "@type": "ListItem", position: 1, name: "LMB Technology", item: SITE_URL },
         { "@type": "ListItem", position: 2, name: "AI Detector with Crop Tool", item: `${SITE_URL}/ai-image-detector` },
       ],
     },

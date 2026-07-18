@@ -5,7 +5,7 @@ export function GuideNav() {
   return (
     <nav className="nav">
       <div className="wrap nav-in">
-        <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technologies</span></a>
+        <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technology</span></a>
         <div className="nav-right">
           <a className="nav-link" href="/guides">Guides</a>
           <a className="nav-link" href="/ai-image-detector">AI Detector</a>
@@ -20,7 +20,7 @@ export function GuideFooter() {
   return (
     <footer className="foot">
       <div className="wrap foot-in">
-        <span>© {new Date().getFullYear()} LMB Technologies</span>
+        <span>© {new Date().getFullYear()} LMB Technology</span>
         <span>
           <a href="/guides">Guides</a>&nbsp;&nbsp;·&nbsp;&nbsp;
           <a href="/ai-image-detector">AI Image Detection</a>
@@ -51,12 +51,12 @@ export function articleJsonLd({ title, description, path }) {
         headline: title,
         description,
         url: `${SITE}${path}`,
-        publisher: { "@type": "Organization", name: "LMB Technologies", url: SITE },
+        publisher: { "@type": "Organization", name: "LMB Technology", url: SITE },
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
-          { "@type": "ListItem", position: 1, name: "LMB Technologies", item: SITE },
+          { "@type": "ListItem", position: 1, name: "LMB Technology", item: SITE },
           { "@type": "ListItem", position: 2, name: "Guides", item: `${SITE}/guides` },
           { "@type": "ListItem", position: 3, name: title, item: `${SITE}${path}` },
         ],

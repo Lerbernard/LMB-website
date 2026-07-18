@@ -1,6 +1,6 @@
 export default function manifest() {
   return {
-    name: "LMB Technologies",
+    name: "LMB Technology",
     short_name: "LMB",
     description: "Software studio. Free AI image detector with crop tool.",
     start_url: "/",

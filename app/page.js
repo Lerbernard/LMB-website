@@ -10,7 +10,7 @@ export default function Home() {
     <>
       <nav className="nav">
         <div className="wrap nav-in">
-          <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technologies</span></a>
+          <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technology</span></a>
           <div className="nav-right">
             <div className="nav-links">
               <a className="nav-link" href="#products">Products</a>
@@ -47,7 +47,7 @@ export default function Home() {
             We build <span className="g">software</span> people<br />actually want to use.
           </h1>
           <p>
-            LMB Technologies is a small studio shipping web and mobile products end to
+            LMB Technology is a small studio shipping web and mobile products end to
             end, from the first sketch to the app store. We design it, build it, and
             keep it running.
           </p>
@@ -110,7 +110,7 @@ export default function Home() {
                   <span className="pc-tag">In the workshop</span>
                 </div>
               </div>
-              <p>We&apos;re always building. New tools and apps from LMB Technologies land here.</p>
+              <p>We&apos;re always building. New tools and apps from LMB Technology land here.</p>
               <span className="pc-cta muted">Coming soon</span>
             </div>
           </div>
@@ -120,13 +120,13 @@ export default function Home() {
         <section className="contact" id="contact">
           <h2 className="display">Have something to build?</h2>
           <p>Tell us what you&apos;re working on. We reply to every message.</p>
-          <a className="btn btn-primary" href="mailto:OverlAI.support@gmail.com">Get in touch</a>
+          <a className="btn btn-primary" href="mailto:lmb.technology.contact@gmail.com">Get in touch</a>
         </section>
       </main>
 
       <footer className="foot">
         <div className="wrap foot-in">
-          <span>© {new Date().getFullYear()} LMB Technologies</span>
+          <span>© {new Date().getFullYear()} LMB Technology</span>
           <span><a href="/ai-image-detector">AI Image Detection</a></span>
         </div>
       </footer>

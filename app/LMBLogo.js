@@ -1,4 +1,4 @@
-// LMB Technologies mark - the "layers" glyph (option 3), the strongest
+// LMB Technology mark - the "layers" glyph (option 3), the strongest
 // software-studio symbol of the set. Purely CSS-var / currentColor friendly.
 export default function LMBLogo({ size = 30 }) {
   return (

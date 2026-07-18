@@ -4,25 +4,25 @@ const SITE = "https://www.lmbtechnology.com"; // ← change to your real domain 
 
 export const metadata = {
   metadataBase: new URL(SITE),
-  title: "LMB Technologies - Software Studio",
+  title: "LMB Technology - Software Studio",
   description:
-    "LMB Technologies is a software studio that designs, builds, and ships web and mobile products end to end. Makers of a free AI image detection tool.",
+    "LMB Technology is a software studio that designs, builds, and ships web and mobile products end to end. Makers of a free AI image detection tool.",
   keywords: [
-    "LMB Technologies", "software studio", "app development", "web development",
+    "LMB Technology", "software studio", "app development", "web development",
     "mobile app studio", "product design", "AI image detection",
   ],
-  applicationName: "LMB Technologies",
+  applicationName: "LMB Technology",
   alternates: { canonical: SITE },
   openGraph: {
-    type: "website", url: SITE, siteName: "LMB Technologies",
-    title: "LMB Technologies - Software Studio",
+    type: "website", url: SITE, siteName: "LMB Technology",
+    title: "LMB Technology - Software Studio",
     description:
       "We build web and mobile software people actually want to use.",
-    images: [{ url: "/og.png", width: 1200, height: 630, alt: "LMB Technologies" }],
+    images: [{ url: "/og.png", width: 1200, height: 630, alt: "LMB Technology" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "LMB Technologies - Software Studio",
+    title: "LMB Technology - Software Studio",
     description: "We design, build, and ship software end to end.",
     images: ["/og.png"],
   },
@@ -39,7 +39,7 @@ export const viewport = {
 const jsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "LMB Technologies",
+  name: "LMB Technology",
   description: "Software studio building web and mobile products.",
   url: SITE,
   makesOffer: {
