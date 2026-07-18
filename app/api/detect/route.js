@@ -5,7 +5,51 @@
 export const runtime = "nodejs";
 export const maxDuration = 30;
 
+// ---- in-memory IP rate limiting -------------------------------------------
+// 30 checks per rolling 15 minutes, 200 per day, per IP. In-memory is fine for
+// a single server; on serverless each warm instance keeps its own counters, so
+// treat this as abuse-dampening rather than a hard guarantee.
+const WINDOW_MS = 15 * 60 * 1000;
+const WINDOW_LIMIT = 30;
+const DAY_LIMIT = 200;
+const hits = new Map(); // ip -> { times: number[], day: string, dayCount: number }
+
+function rateLimit(ip) {
+  const now = Date.now();
+  const today = new Date().toISOString().slice(0, 10);
+  let rec = hits.get(ip);
+  if (!rec || rec.day !== today) rec = { times: [], day: today, dayCount: 0 };
+  rec.times = rec.times.filter((t) => now - t < WINDOW_MS);
+  if (rec.dayCount >= DAY_LIMIT) {
+    hits.set(ip, rec);
+    return { ok: false, error: "Daily limit reached. Come back tomorrow." };
+  }
+  if (rec.times.length >= WINDOW_LIMIT) {
+    hits.set(ip, rec);
+    const retryMin = Math.ceil((WINDOW_MS - (now - rec.times[0])) / 60000);
+    return { ok: false, error: `Too many checks. Try again in about ${retryMin} min.` };
+  }
+  rec.times.push(now);
+  rec.dayCount += 1;
+  hits.set(ip, rec);
+  // occasional cleanup so the map can't grow forever
+  if (hits.size > 5000) {
+    for (const [k, v] of hits) if (v.day !== today) hits.delete(k);
+  }
+  return { ok: true };
+}
+// ---------------------------------------------------------------------------
+
 export async function POST(req) {
+  const ip =
+    (req.headers.get("x-forwarded-for") || "").split(",")[0].trim() ||
+    req.headers.get("x-real-ip") ||
+    "unknown";
+  const rl = rateLimit(ip);
+  if (!rl.ok) {
+    return Response.json({ error: rl.error }, { status: 429 });
+  }
+
   const PROXY_BASE = process.env.PROXY_BASE;
   const APP_TOKEN = process.env.APP_TOKEN;
   if (!PROXY_BASE || !APP_TOKEN) {

@@ -26,7 +26,7 @@ export function GuideFooter() {
         <span>© {new Date().getFullYear()} LMB Technology</span>
         <span>
           <a href="/ai-image-detector/guides">Guides</a>&nbsp;&nbsp;·&nbsp;&nbsp;
-          <a href="/ai-image-detector">AI Image Detection</a>
+          <a href="/ai-image-detector">AI Image Detection</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/privacy">Privacy</a>
         </span>
       </div>
     </footer>

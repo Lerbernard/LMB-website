@@ -25,6 +25,21 @@ const guides = [
     title: "How to check part of an image for AI",
     blurb: "Why cropping to a face, hand, or background detail gives a cleaner read than the full picture.",
   },
+  {
+    href: "/ai-image-detector/guides/is-this-photo-of-a-person-real",
+    title: "Is this photo of a person real?",
+    blurb: "A one-minute checklist for profile pictures and portraits: the tells, the crop trick, and when to be suspicious.",
+  },
+  {
+    href: "/ai-image-detector/guides/ai-detector-accuracy-explained",
+    title: "AI detector accuracy, explained",
+    blurb: "What the percentage really means, what causes false positives and negatives, and how to read results responsibly.",
+  },
+  {
+    href: "/ai-image-detector/guides/reverse-image-search-and-ai-check",
+    title: "Reverse image search + AI check",
+    blurb: "The two-step verification: find where an image came from, then check how it was made.",
+  },
 ];
 
 export default function GuidesIndex() {

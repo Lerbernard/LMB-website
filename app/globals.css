@@ -238,7 +238,14 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
 .contact h2{font-family:"Space Grotesk";font-size:clamp(26px,4vw,38px);font-weight:600;margin-bottom:10px}
 .contact p{color:var(--text2);margin-bottom:24px}
 
-@media(max-width:720px){ .products{grid-template-columns:1fr} .brand.product{display:none} }
+@media(max-width:720px){
+  .products{grid-template-columns:1fr}
+  .brand{font-size:16px}
+  .brand.product{margin-left:10px;padding-left:10px;font-size:13.5px}
+  .brand.product svg{width:22px;height:22px}
+  .brand-group{min-width:0}
+  .brand.product{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+}
 
 /* hero tagline under the H1 (keeps the punchy line visible) */
 .hero-tagline{font-size:clamp(18px,3vw,24px);color:var(--text2);
@@ -332,12 +339,13 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
 body > nav,
 body > header,
 body > footer{flex:0 0 auto}
-body > main{flex:1 0 auto;width:100%;padding-bottom:120px}
+body > main{flex:1 0 auto;width:100%}
+main.wrap{padding-bottom:160px}
 
 /* short pages (guides index, thin articles) get breathing room instead of a
    dead gap: the content block centres itself in the space it has */
 .article-wrap{display:flex;flex-direction:column;justify-content:center;
-  align-items:stretch;padding-bottom:64px}
+  align-items:stretch}
 .article-wrap > .guide-list,
 .article-wrap > .article{flex:0 0 auto}
 
@@ -346,8 +354,8 @@ body > main{flex:1 0 auto;width:100%;padding-bottom:120px}
   .wrap{padding:0 20px}
   .nav-in{height:58px}
   .brand{font-size:17px}
-  body > main{padding-bottom:80px}
-  .article-wrap{padding-top:28px;padding-bottom:48px}
+  main.wrap{padding-bottom:110px}
+  .article-wrap{padding-top:28px}
   .article-head{margin-bottom:26px}
   .guide-card{padding:20px}
   .guide-list{gap:12px}

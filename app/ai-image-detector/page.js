@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import CropModal from "./CropModal";
 import AdUnit from "./AdUnit";
 import LMBLogo from "../LMBLogo";
@@ -84,6 +84,34 @@ const jsonLd = {
 };
 
 
+// Decode any browser-readable image, scale its longest side down to maxDim,
+// and re-encode as JPEG. Throws if the browser can't decode the file (HEIC on
+// Chrome, corrupt files), which the caller turns into a friendly message.
+async function downscaleToJpeg(file, maxDim) {
+  const url = URL.createObjectURL(file);
+  try {
+    const img = await new Promise((resolve, reject) => {
+      const i = new Image();
+      i.onload = () => resolve(i);
+      i.onerror = () => reject(new Error("decode failed"));
+      i.src = url;
+    });
+    const w = img.naturalWidth, h = img.naturalHeight;
+    if (!w || !h) throw new Error("empty image");
+    const scale = Math.min(1, maxDim / Math.max(w, h));
+    const cw = Math.max(1, Math.round(w * scale));
+    const ch = Math.max(1, Math.round(h * scale));
+    const canvas = document.createElement("canvas");
+    canvas.width = cw; canvas.height = ch;
+    canvas.getContext("2d").drawImage(img, 0, 0, cw, ch);
+    const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.9));
+    if (!blob) throw new Error("encode failed");
+    return blob;
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
 export default function Home() {
   const fileInput = useRef(null);
   const [drag, setDrag] = useState(false);
@@ -100,16 +128,69 @@ export default function Home() {
     setStatus("idle"); setError(null); setCropSrc(null);
   };
 
-  const accept = useCallback((file) => {
+  const accept = useCallback(async (file) => {
     if (!file) return;
-    if (!file.type.startsWith("image/")) { setError("Please choose an image file."); setStatus("error"); return; }
+    const name = (file.name || "").toLowerCase();
+    const looksHeic = /\.hei[cf]$/.test(name) || /hei[cf]/.test(file.type);
+    const looksImage =
+      file.type.startsWith("image/") ||
+      looksHeic ||
+      /\.(jpe?g|png|webp|gif|bmp|avif)$/.test(name);
+    if (!looksImage) { setError("Please choose an image file."); setStatus("error"); return; }
     setError(null);
-    const url = URL.createObjectURL(file);
-    setPreview(url);
-    setRawFile(file);
-    setPct(null);
-    setStatus("idle");
+    try {
+      // Decode + downscale to max 1024px JPEG before anything else. This makes
+      // uploads 3-5x faster on mobile and transcodes HEIC on browsers that can
+      // decode it (Safari).
+      const blob = await downscaleToJpeg(file, 1024);
+      const url = URL.createObjectURL(blob);
+      setPreview(url);
+      setRawFile(blob);
+      setPct(null);
+      setStatus("idle");
+    } catch {
+      setError(
+        looksHeic
+          ? "This looks like an iPhone HEIC photo, which this browser can't read. Convert it to JPG (or share it from the Photos app, which converts automatically) and try again."
+          : "Couldn't read that image. Try a JPG, PNG, or WebP."
+      );
+      setStatus("error");
+    }
   }, []);
+
+  // paste a screenshot (Ctrl/Cmd+V) anywhere on the page
+  useEffect(() => {
+    const onPaste = (e) => {
+      const item = [...(e.clipboardData?.items || [])].find((i) => i.type.startsWith("image/"));
+      if (item) { e.preventDefault(); accept(item.getAsFile()); }
+    };
+    document.addEventListener("paste", onPaste);
+    return () => document.removeEventListener("paste", onPaste);
+  }, [accept]);
+
+  // drop an image anywhere on the page, not just on the dropzone
+  useEffect(() => {
+    const over = (e) => {
+      if ([...(e.dataTransfer?.types || [])].includes("Files")) {
+        e.preventDefault(); setDrag(true);
+      }
+    };
+    const leave = (e) => { if (!e.relatedTarget) setDrag(false); };
+    const drop = (e) => {
+      if (e.dataTransfer?.files?.length) {
+        e.preventDefault(); setDrag(false);
+        accept(e.dataTransfer.files[0]);
+      }
+    };
+    window.addEventListener("dragover", over);
+    window.addEventListener("dragleave", leave);
+    window.addEventListener("drop", drop);
+    return () => {
+      window.removeEventListener("dragover", over);
+      window.removeEventListener("dragleave", leave);
+      window.removeEventListener("drop", drop);
+    };
+  }, [accept]);
 
   const onPick = (e) => accept(e.target.files?.[0]);
   const onDrop = (e) => {
@@ -167,7 +248,6 @@ export default function Home() {
           <p className="hero-tagline">Is this image real, or made by AI?</p>
           <p>Upload any image, use the <strong>built-in crop tool</strong> to zoom into a
              face, object, or suspicious region, and get an AI-likelihood score in seconds.</p>
-          <a className="btn btn-primary" href="#detector">Check an image</a>
         </div>
       </header>
 
@@ -185,11 +265,11 @@ export default function Home() {
             >
               <div className="dz-badge"><DetectorLogo size={96} /></div>
               <h3>Drop an image, or tap to browse</h3>
-              <p>JPG, PNG or WebP, up to 12MB. Nothing is stored.</p>
+              <p>JPG, PNG, WebP or iPhone photos. You can also paste a screenshot (Ctrl+V). Nothing is stored.</p>
               <div className="dz-actions">
                 <span className="btn btn-primary">Choose image</span>
               </div>
-              <input ref={fileInput} type="file" accept="image/*" hidden onChange={onPick} />
+              <input ref={fileInput} type="file" accept="image/*,.heic,.heif" hidden onChange={onPick} />
             </div>
           )}
 
@@ -199,7 +279,7 @@ export default function Home() {
                 <img src={preview} alt="Your upload" />
                 {status === "loading" && <div className="scanline" />}
               </div>
-              <div className="result-body">
+              <div className="result-body" aria-live="polite">
                 {status === "done" && verdict && (
                   <>
                     <div className="stat">
@@ -338,7 +418,7 @@ export default function Home() {
       <footer className="foot">
         <div className="wrap foot-in">
           <span>© {new Date().getFullYear()} LMB Technology</span>
-          <span>Results are estimates, verify anything that matters.</span>
+          <span><a href="/ai-image-detector/guides">Guides</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/privacy">Privacy</a></span>
         </div>
       </footer>
 

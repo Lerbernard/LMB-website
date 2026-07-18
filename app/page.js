@@ -126,7 +126,7 @@ export default function Home() {
       <footer className="foot">
         <div className="wrap foot-in">
           <span>© {new Date().getFullYear()} LMB Technology</span>
-          <span><a href="/ai-image-detector">AI Image Detection</a></span>
+          <span><a href="/ai-image-detector">AI Image Detection</a>&nbsp;&nbsp;·&nbsp;&nbsp;<a href="/privacy">Privacy</a></span>
         </div>
       </footer>
     </>
