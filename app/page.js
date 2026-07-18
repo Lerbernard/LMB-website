@@ -42,7 +42,6 @@ export default function Home() {
       <header className="hero" id="top">
         <div className="hero-glow" />
         <div className="wrap">
-          <span className="eyebrow"><LMBLogo size={17} /> Software studio</span>
           <h1 className="display">
             We build <span className="g">software</span> people<br />actually want to use.
           </h1>

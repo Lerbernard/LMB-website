@@ -1,4 +1,4 @@
-import { GuideNav, GuideFooter, BackLink } from "./parts";
+import { GuideNav, GuideFooter } from "./parts";
 
 const SITE = "https://www.lmbtechnology.com";
 
@@ -32,7 +32,6 @@ export default function GuidesIndex() {
     <>
       <GuideNav />
       <main className="wrap article-wrap">
-        <BackLink href="/ai-image-detector" label="Back to the AI detector" />
         <header className="article-head">
           <h1 className="display">Guides</h1>
           <p>Short, practical reads on AI images and how to detect them.</p>

@@ -1,14 +1,17 @@
 import LMBLogo from "../../LMBLogo";
+import DetectorLogo from "../../DetectorLogo";
 import ThemeToggle from "../../ThemeToggle";
 
 export function GuideNav() {
   return (
     <nav className="nav">
       <div className="wrap nav-in">
-        <a className="brand" href="/"><LMBLogo size={32} /> LMB<span className="ai">&nbsp;Technology</span></a>
+        <div className="brand-group">
+          <a className="brand" href="/"><LMBLogo size={30} /> LMB</a>
+          <a className="brand product" href="/ai-image-detector"><DetectorLogo size={28} /> AI Image Detection</a>
+        </div>
         <div className="nav-right">
           <a className="nav-link" href="/ai-image-detector/guides">Guides</a>
-          <a className="nav-link" href="/ai-image-detector">AI Detector</a>
           <ThemeToggle />
         </div>
       </div>
@@ -28,10 +31,6 @@ export function GuideFooter() {
       </div>
     </footer>
   );
-}
-
-export function BackLink({ href, label }) {
-  return <a className="back-link" href={href}>&larr; {label}</a>;
 }
 
 export function GuideCta() {

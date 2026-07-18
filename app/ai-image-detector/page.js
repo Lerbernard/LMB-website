@@ -163,7 +163,6 @@ export default function Home() {
       <header className="hero" id="top">
         <div className="hero-glow" />
         <div className="wrap">
-          <span className="eyebrow"><DetectorLogo size={18} /> Seeing isn&apos;t believing</span>
           <h1 className="display">AI Detector <span className="g">with Crop Tool</span></h1>
           <p className="hero-tagline">Is this image real, or made by AI?</p>
           <p>Upload any image, use the <strong>built-in crop tool</strong> to zoom into a

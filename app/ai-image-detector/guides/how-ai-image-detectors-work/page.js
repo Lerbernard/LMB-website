@@ -1,4 +1,4 @@
-import { GuideNav, GuideFooter, GuideCta, BackLink, articleJsonLd } from "../parts";
+import { GuideNav, GuideFooter, GuideCta, articleJsonLd } from "../parts";
 
 const SITE = "https://www.lmbtechnology.com";
 const TITLE = "How AI Image Detectors Work (and What the Score Means)";
@@ -20,7 +20,6 @@ export default function Page() {
         __html: JSON.stringify(articleJsonLd({ title: TITLE, description: DESC, path: "/ai-image-detector/guides/how-ai-image-detectors-work" })),
       }} />
       <main className="wrap article-wrap">
-        <BackLink href="/ai-image-detector/guides" label="All guides" />
         <article className="article">
           <h1 className="display">How AI image detectors work</h1>
           <p className="article-lead">

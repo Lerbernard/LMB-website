@@ -67,7 +67,27 @@ export default function RootLayout({ children }) {
         <script type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
-      <body>{children}</body>
+      <body>
+        {children}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){
+if(window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+var sel='.step,.guide-card,.product-card,.faq-list details,.article h2,.article-cta,.feature-band,.contact';
+var els=document.querySelectorAll(sel);
+if(!els.length||!('IntersectionObserver' in window))return;
+document.documentElement.classList.add('js-reveal');
+var io=new IntersectionObserver(function(en){
+  en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+},{rootMargin:'0px 0px -8% 0px',threshold:.08});
+els.forEach(function(el){
+  if(el.getBoundingClientRect().top<window.innerHeight*.9){el.classList.add('rv','in');}
+  else{el.classList.add('rv');io.observe(el);}
+});
+})();`,
+          }}
+        />
+      </body>
     </html>
   );
 }

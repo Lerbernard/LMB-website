@@ -19,7 +19,11 @@ body{
   background:var(--bg); color:var(--text);
   font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
   line-height:1.55; -webkit-font-smoothing:antialiased;
-  min-height:100vh;
+  -webkit-text-size-adjust:100%;
+  /* sticky-footer shell: every page fills at least one screen */
+  display:flex; flex-direction:column;
+  min-height:100vh;          /* fallback */
+  min-height:100svh;         /* mobile: ignores collapsing browser chrome */
 }
 .display{font-family:"Space Grotesk",Inter,sans-serif;letter-spacing:-0.02em;line-height:1.05}
 a{color:inherit;text-decoration:none}
@@ -28,7 +32,7 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 
 /* nav */
 .nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);
-  background:var(--nav-bg);border-bottom:1px solid var(--line)}
+  background:var(--nav-bg)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;height:64px}
 .brand{display:flex;align-items:center;gap:10px;font-family:"Space Grotesk";font-weight:600;font-size:19px}
 .brand .ai{color:var(--teal)}
@@ -40,7 +44,9 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .hero{position:relative;padding:96px 0 72px;text-align:center;overflow:hidden}
 .hero-glow{position:absolute;inset:0;pointer-events:none;
   background:radial-gradient(560px 360px at 50% 8%, rgba(124,77,255,.18), transparent 70%),
-             radial-gradient(420px 300px at 78% 32%, rgba(0,188,212,.10), transparent 70%)}
+             radial-gradient(420px 300px at 78% 32%, rgba(0,188,212,.10), transparent 70%);
+  -webkit-mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%);
+  mask-image:linear-gradient(180deg,#000 0%,#000 55%,transparent 100%)}
 .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;
   letter-spacing:.14em;text-transform:uppercase;color:var(--teal);
   border:1px solid var(--line);padding:6px 14px;border-radius:999px;margin-bottom:26px;
@@ -106,9 +112,16 @@ button{font-family:inherit;cursor:pointer;border:none;background:none;color:inhe
 .step p{font-size:14px;color:var(--text2)}
 
 /* footer */
-.foot{margin-top:72px;border-top:1px solid var(--line);padding:32px 0}
+.foot{margin-top:auto;background:var(--teal);
+  padding:26px 0 calc(26px + env(safe-area-inset-bottom,0px))}
+.foot,.foot-in,.foot a{color:#04222a}
+.foot a{font-weight:600}
+.foot a:hover{color:#001318}
 .foot-in{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
-  font-size:13.5px;color:var(--text3)}
+  font-size:13.5px}
+@media(max-width:720px){
+  .foot-in{flex-direction:column;align-items:flex-start;gap:8px}
+}
 .foot a:hover{color:var(--text)}
 
 @media(max-width:720px){
@@ -299,19 +312,169 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
 [data-theme="light"] .product-card:hover,
 [data-theme="light"] .guide-card:hover{background:#f2f2f9}
 
-/* back links on guide pages */
-.back-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;
-  font-weight:600;color:var(--text2);margin-bottom:20px;
-  padding:8px 14px;border-radius:999px;background:#2a2a33;transition:background .15s,color .15s}
-.back-link:hover{color:var(--text);background:#34343f}
-[data-theme="light"] .back-link{background:#e4e4ec;color:#44444e}
-[data-theme="light"] .back-link:hover{background:#d6d6e0;color:#16161c}
 
 
-/* light mode: same wash, fainter */
-[data-theme="light"] .hero-glow{position:absolute;inset:0;pointer-events:none;
-  background:radial-gradient(560px 360px at 50% 8%, rgba(124,77,255,.18), transparent 70%),
-             radial-gradient(420px 300px at 78% 32%, rgba(0,188,212,.10), transparent 70%)}
+/* light mode: fainter glow */
+[data-theme="light"] .hero-glow{
+  background:
+    radial-gradient(480px 300px at 50% 0%, rgba(124,77,255,.10), transparent 62%),
+    radial-gradient(380px 260px at 78% 24%, rgba(0,188,212,.07), transparent 62%);
+}
 
 /* brand group keeps company + product together on the left */
 .brand-group{display:flex;align-items:center}
+
+
+/* ===== full-height page shell =====
+   body is a flex column (see body rule above). The main content column grows
+   to absorb the leftover height, so the footer always sits on or below the
+   fold instead of floating mid-screen on short pages. */
+body > nav,
+body > header,
+body > footer{flex:0 0 auto}
+body > main{flex:1 0 auto;width:100%;padding-bottom:120px}
+
+/* short pages (guides index, thin articles) get breathing room instead of a
+   dead gap: the content block centres itself in the space it has */
+.article-wrap{display:flex;flex-direction:column;justify-content:center;
+  align-items:stretch;padding-bottom:64px}
+.article-wrap > .guide-list,
+.article-wrap > .article{flex:0 0 auto}
+
+/* ===== mobile ===== */
+@media(max-width:720px){
+  .wrap{padding:0 20px}
+  .nav-in{height:58px}
+  .brand{font-size:17px}
+  body > main{padding-bottom:80px}
+  .article-wrap{padding-top:28px;padding-bottom:48px}
+  .article-head{margin-bottom:26px}
+  .guide-card{padding:20px}
+  .guide-list{gap:12px}
+  .how{padding:48px 0 8px}
+  .how h2,.faq h2{font-size:25px}
+  .how .sub{margin-bottom:30px}
+  .contact,.faq{padding:48px 0 8px}
+  .dz{padding:38px 20px}
+  .result-body{padding:20px 18px}
+  .verdict .pct{font-size:42px}
+  .article-cta{padding:22px}
+}
+
+/* comfortable tap targets + no cramped buttons on narrow screens */
+.btn,.nav-cta{display:inline-flex;align-items:center;
+  justify-content:center;min-height:44px}
+@media(max-width:420px){
+  .wrap{padding:0 16px}
+  .dz-actions,.result-actions,.hero-cta{flex-direction:column;align-items:stretch}
+  .dz-actions .btn,.result-actions .btn,.hero-cta .btn{width:100%}
+  .stat{flex-direction:column;align-items:flex-start;gap:2px;padding:13px 2px}
+}
+
+/* very short viewports (landscape phones): don't force a tall empty hero */
+@media(max-height:560px){
+  .hero{padding:44px 0 34px}
+  .article-wrap{justify-content:flex-start}
+}
+
+/* =========================================================
+   ANIMATION PACK (pure CSS + tiny reveal script in layout)
+   ========================================================= */
+
+/* --- 1. Ambient background motion: hero glow blobs drift --- */
+.hero-glow::before,.hero-glow::after{content:"";position:absolute;
+  width:520px;height:520px;border-radius:50%;filter:blur(90px);
+  opacity:.16;will-change:transform}
+.hero-glow::before{left:14%;top:-80px;background:var(--purple);
+  animation:blob-a 16s ease-in-out infinite alternate}
+.hero-glow::after{right:14%;top:60px;width:420px;height:420px;background:var(--teal);
+  opacity:.10;animation:blob-b 20s ease-in-out infinite alternate}
+@keyframes blob-a{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(70px,40px) scale(1.12)}
+  100%{transform:translate(-40px,80px) scale(.95)}}
+@keyframes blob-b{
+  0%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(-80px,-30px) scale(1.08)}
+  100%{transform:translate(40px,-70px) scale(.92)}}
+[data-theme="light"] .hero-glow::before{opacity:.09}
+[data-theme="light"] .hero-glow::after{opacity:.07}
+
+/* --- 2. Animated gradient headline (the "with Crop Tool" / "software" span) --- */
+.hero h1 .g{background:linear-gradient(100deg,var(--purple),var(--teal),var(--purple));
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+  animation:grad-slide 7s ease-in-out infinite}
+@keyframes grad-slide{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+
+/* --- 3. Scroll reveal (scrollytelling-lite) ---
+   Elements start hidden only once JS confirms it's running (html.js-reveal),
+   so content is never invisible without JavaScript. */
+.js-reveal .rv{opacity:0;transform:translateY(22px);
+  transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.js-reveal .rv.in{opacity:1;transform:none}
+/* gentle stagger for siblings */
+.js-reveal .rv.in:nth-child(2){transition-delay:.07s}
+.js-reveal .rv.in:nth-child(3){transition-delay:.14s}
+.js-reveal .rv.in:nth-child(4){transition-delay:.21s}
+
+/* --- 4. Microinteractions --- */
+/* tactile press on every button */
+.btn:active,.nav-cta:active,.theme-btn:active,.nav-menu-btn:active{
+  transform:translateY(1px) scale(.97);transition-duration:.06s}
+/* nav links: animated underline sweep */
+.nav-link{position:relative}
+.nav-link::after{content:"";position:absolute;left:16px;right:16px;bottom:6px;
+  height:2px;border-radius:2px;background:var(--teal);
+  transform:scaleX(0);transform-origin:left;transition:transform .25s cubic-bezier(.2,.7,.3,1)}
+.nav-link:hover::after{transform:scaleX(1)}
+/* theme toggle: spin the icon on hover */
+.theme-btn svg{transition:transform .45s cubic-bezier(.3,1.4,.4,1)}
+.theme-btn:hover svg{transform:rotate(140deg)}
+/* footer links: nudge */
+.foot a{display:inline-block;transition:transform .18s}
+.foot a:hover{transform:translateY(-2px)}
+
+/* --- 5. Hover shine sweep on cards (hover web animation effect) --- */
+.guide-card,.product-card,.step{position:relative;overflow:hidden}
+.guide-card::before,.product-card::before{content:"";position:absolute;top:0;bottom:0;
+  left:-70%;width:45%;pointer-events:none;
+  background:linear-gradient(105deg,transparent,rgba(255,255,255,.055),transparent);
+  transform:skewX(-18deg);transition:left .55s ease}
+.guide-card:hover::before,.product-card:hover::before{left:130%}
+[data-theme="light"] .guide-card::before,
+[data-theme="light"] .product-card::before{
+  background:linear-gradient(105deg,transparent,rgba(124,77,255,.07),transparent)}
+/* arrow slides on card CTA hover */
+.pc-cta{display:inline-block;transition:transform .2s}
+.guide-card:hover .pc-cta,.product-card:hover .pc-cta{transform:translateX(4px)}
+
+/* --- 6. Detector polish --- */
+/* result card pops in */
+.result{animation:pop-in .45s cubic-bezier(.2,.9,.3,1.2) both}
+@keyframes pop-in{from{opacity:0;transform:translateY(14px) scale(.98)}
+  to{opacity:1;transform:none}}
+/* dashed dropzone breathes softly to invite the drop */
+.dz{animation:dz-breathe 4.5s ease-in-out infinite}
+@keyframes dz-breathe{0%,100%{border-color:var(--line)}50%{border-color:rgba(0,188,212,.45)}}
+.dz.drag{animation:none}
+/* meter fill gets a moving sheen */
+.meter i{background-image:linear-gradient(90deg,rgba(255,255,255,0) 0%,
+  rgba(255,255,255,.25) 50%,rgba(255,255,255,0) 100%);
+  background-size:180px 100%;background-repeat:no-repeat;
+  animation:meter-sheen 2.2s ease-in-out infinite}
+@keyframes meter-sheen{0%{background-position:-180px 0}100%{background-position:calc(100% + 180px) 0}}
+
+/* --- 7. FAQ open/close feel --- */
+.faq-list summary::after{transition:transform .25s cubic-bezier(.3,1.3,.4,1)}
+.faq-list details p{animation:faq-open .3s ease both}
+@keyframes faq-open{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+
+/* --- accessibility: kill everything for reduced-motion users --- */
+@media(prefers-reduced-motion:reduce){
+  .hero-glow::before,.hero-glow::after,.hero h1 .g,.dz,.meter i,
+  .result,.faq-list details p{animation:none}
+  .js-reveal .rv{opacity:1;transform:none;transition:none}
+  .nav-link::after,.theme-btn svg,.foot a,.pc-cta,
+  .guide-card::before,.product-card::before{transition:none}
+}
