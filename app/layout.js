@@ -68,6 +68,11 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       </head>
       <body>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3168595166500339"
+          crossOrigin="anonymous"
+        />
         {children}
         <script
           dangerouslySetInnerHTML={{

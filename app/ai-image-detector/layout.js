@@ -1,5 +1,3 @@
-import Script from "next/script";
-
 const SITE = "https://www.lmbtechnology.com"; // ← your real domain
 
 export const metadata = {
@@ -37,18 +35,5 @@ export const metadata = {
 };
 
 export default function DetectorLayout({ children }) {
-  const adsClient = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
-  return (
-    <>
-      {adsClient && (
-        <Script
-          async
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${adsClient}`}
-          crossOrigin="anonymous"
-          strategy="afterInteractive"
-        />
-      )}
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

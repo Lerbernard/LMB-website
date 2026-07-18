@@ -5,7 +5,7 @@ import { useEffect } from "react";
 // NEXT_PUBLIC_ADSENSE_CLIENT is set, so the site works fine before your
 // AdSense account is approved.
 export default function AdUnit({ slot }) {
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
+  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT || "ca-pub-3168595166500339";
   useEffect(() => {
     if (!client || !slot) return;
     try {
