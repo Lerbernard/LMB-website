@@ -53,7 +53,7 @@ export default function Home() {
           </p>
           <div className="hero-cta">
             <a className="btn btn-primary" href="#products">See our products</a>
-            <a className="btn btn-ghost" href="#contact">Work with us</a>
+            <a className="btn btn-grey" href="#contact">Work with us</a>
           </div>
         </div>
       </header>

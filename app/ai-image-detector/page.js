@@ -6,6 +6,84 @@ import LMBLogo from "../LMBLogo";
 import DetectorLogo from "../DetectorLogo";
 import ThemeToggle from "../ThemeToggle";
 
+// Rich structured data: WebApplication + FAQ + Breadcrumbs.
+// FAQ schema can surface as expandable Q&A directly in Google results.
+const SITE_URL = "https://www.lmbtechnology.com";
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      name: "AI Detector with Crop Tool",
+      url: `${SITE_URL}/ai-image-detector`,
+      applicationCategory: "MultimediaApplication",
+      operatingSystem: "Any (web browser)",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      featureList: [
+        "Detect AI-generated images",
+        "Built-in crop tool to check a specific region",
+        "Instant AI-likelihood score",
+        "Works on photos, screenshots, and art",
+        "No sign-up required",
+      ],
+      publisher: { "@type": "Organization", name: "LMB Technology", url: SITE_URL },
+    },
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "LMB Technology", item: SITE_URL },
+        { "@type": "ListItem", position: 2, name: "AI Detector with Crop Tool", item: `${SITE_URL}/ai-image-detector` },
+      ],
+    },
+    {
+      "@type": "FAQPage",
+      mainEntity: [
+        {
+          "@type": "Question",
+          name: "How do I check if an image is AI-generated?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Upload the image to the AI detector, optionally crop to the part you want to check, and it returns an AI-likelihood score in seconds. No sign-up is required.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Is the AI image detector free?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. The AI detector is completely free to use, with no account or sign-up needed. Images are analyzed and not stored.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "What does the crop tool do?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "The built-in crop tool lets you draw a box around a specific area - like a face, hand, or background detail - so the detector scores exactly that region at full resolution instead of the whole image.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "How accurate is AI image detection?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Results are probability estimates, not proof. No detector is perfect, so treat the score as a strong signal and verify anything important through other sources.",
+          },
+        },
+        {
+          "@type": "Question",
+          name: "Can it detect AI-generated art and photos?",
+          acceptedAnswer: {
+            "@type": "Answer",
+            text: "Yes. It works on photographs, screenshots, and digital art in common formats like JPG, PNG, and WebP.",
+          },
+        },
+      ],
+    },
+  ],
+};
+
+
 export default function Home() {
   const fileInput = useRef(null);
   const [drag, setDrag] = useState(false);
@@ -67,12 +145,14 @@ export default function Home() {
 
   return (
     <>
+      <script type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <nav className="nav">
         <div className="wrap nav-in">
           <a className="brand" href="/"><LMBLogo size={30} /> LMB</a>
           <a className="brand product" href="/ai-image-detector"><DetectorLogo size={28} /> AI Image Detection</a>
           <div className="nav-right">
-            <a className="nav-link" href="/guides">Guides</a>
+            <a className="nav-link" href="/ai-image-detector/guides">Guides</a>
             <ThemeToggle />
           </div>
         </div>

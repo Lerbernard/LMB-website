@@ -291,3 +291,20 @@ body,.nav,.dz,.result,.step,.modal-card,.card{transition:background .25s,color .
     border-top:1px solid var(--line);background:var(--nav-bg)}
   .nav-drop .nav-link{padding:12px 14px;font-size:15.5px}
 }
+
+/* footer pinned to the viewport bottom on short pages */
+body{display:flex;flex-direction:column}
+.foot{margin-top:auto}
+
+/* whole card reacts on hover, not just the border */
+.product-card:hover,.guide-card:hover{background:#1d1d26}
+[data-theme="light"] .product-card:hover,
+[data-theme="light"] .guide-card:hover{background:#f2f2f9}
+
+/* back links on guide pages */
+.back-link{display:inline-flex;align-items:center;gap:6px;font-size:14px;
+  font-weight:600;color:var(--text2);margin-bottom:20px;
+  padding:8px 14px;border-radius:999px;background:#2a2a33;transition:background .15s,color .15s}
+.back-link:hover{color:var(--text);background:#34343f}
+[data-theme="light"] .back-link{background:#e4e4ec;color:#44444e}
+[data-theme="light"] .back-link:hover{background:#d6d6e0;color:#16161c}
