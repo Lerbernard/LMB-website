@@ -1,4 +1,5 @@
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next";
 
 const SITE = "https://www.lmbtechnology.com"; // ← change to your real domain when you deploy
 
@@ -74,6 +75,7 @@ export default function RootLayout({ children }) {
           crossOrigin="anonymous"
         />
         {children}
+        <Analytics />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){
